@@ -1,0 +1,46 @@
+require: rubocop-rspec
+
+AllCops:
+  Include:
+    - 'app/**/*.rb'
+    - 'config/**/*.rb'
+    - 'lib/**/*.rb'
+    - 'lib/**/*.rake'
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+  DisplayCopNames: true
+  StyleGuideCopsOnly: true
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 20
+
+Style/BarePercentLiterals:
+  Enabled: false
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/RaiseArgs:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  SupportedStyles:
+    - single_quotes
+    - double_quotes
