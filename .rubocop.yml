@@ -10,7 +10,10 @@ AllCops:
     - 'vendor/**/*'
     - 'bin/**/*'
   DisplayCopNames: true
-  StyleGuideCopsOnly: false
+  StyleGuideCopsOnly: true
+
+Rails:
+  Enabled: true
 
 Metrics/LineLength:
   Max: 100
