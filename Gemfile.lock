@@ -201,7 +201,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   coffee-rails (~> 4.2)
   factory_girl_rails
   jbuilder (~> 2.5)
