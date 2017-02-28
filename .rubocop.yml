@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 AllCops:
   Include:
     - 'app/**/*.rb'
@@ -6,8 +8,6 @@ AllCops:
     - 'lib/**/*.rake'
   Exclude:
     - 'vendor/**/*'
-    - 'spec/**/*'
-    - 'db/*.rb'
     - 'bin/**/*'
   DisplayCopNames: true
   StyleGuideCopsOnly: false
