@@ -40,6 +40,7 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     ast (2.3.0)
+    bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
@@ -203,6 +204,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   coffee-rails (~> 4.2)
   factory_girl_rails
   jbuilder (~> 2.5)
@@ -225,4 +227,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.13.1
+   1.13.6
