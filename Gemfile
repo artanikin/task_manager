@@ -22,6 +22,8 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"
   gem "factory_girl_rails"
+  gem "database_cleaner"
+  gem "spring-commands-rspec"
 end
 
 group :development do
@@ -31,6 +33,12 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "rubocop", "~> 0.47.1", require: false
   gem "rubocop-rspec", require: false
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 3.1"
+  gem "capybara"
+  gem "launchy"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
