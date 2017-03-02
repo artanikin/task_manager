@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  it { should have_many(:tasks).dependent(:destroy) }
+
   it do
     subject.password = "pass123"
     should validate_uniqueness_of(:email)
@@ -39,7 +41,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "#authenticate" do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, password: "pass123") }
 
     it "return user when right password" do
       expect(user.authenticate("pass123")).to eq(user)
@@ -47,6 +49,14 @@ RSpec.describe User, type: :model do
 
     it "return False when password wrong" do
       expect(user.authenticate("wrong_pass")).to be_falsey
+    end
+  end
+
+  describe "#to_s" do
+    let(:user) { create(:user) }
+
+    it "return email" do
+      expect(user.to_s).to eq(user.email)
     end
   end
 end

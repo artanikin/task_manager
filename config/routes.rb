@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
   scope module: "web" do
-    # TODO: replace this temp root routes
-    root "users#new"
+    root "tasks#index"
 
-    # resources :users, only: [:new, :create]
-    # resources :sessions, only: [:new, :create, :destroy]
+    resources :tasks, only: [:index]
 
     resource "users", only: [:new, :create], path_names: { new: "sign_up" } do
       resource :session, only: [], path: "" do

@@ -1,0 +1,15 @@
+.row
+  .col-lg-12
+    #tasks
+      - if @tasks.empty?
+        h2 There are no tasks
+      - else
+        table.table.table-striped
+          thead
+            tr
+              th #
+              th Created
+              th Name
+              th User
+          tbody
+            = render @tasks
