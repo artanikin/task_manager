@@ -5,7 +5,7 @@ feature "User sign in", %(
   As an register user
   I want to be able to Sign in
 ) do
-  given(:user) { create(:user, password: "pass123") }
+  given(:user) { create(:user) }
 
   before { visit new_users_session_path }
 
