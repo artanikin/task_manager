@@ -11,5 +11,9 @@ Rails.application.routes.draw do
         delete :destroy, path: "sign_out", as: :destroy
       end
     end
+
+    namespace :account do
+      resources :tasks, only: [:index]
+    end
   end
 end
