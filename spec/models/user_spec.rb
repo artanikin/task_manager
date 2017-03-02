@@ -51,4 +51,12 @@ RSpec.describe User, type: :model do
       expect(user.authenticate("wrong_pass")).to be_falsey
     end
   end
+
+  describe "#to_s" do
+    let(:user) { create(:user) }
+
+    it "return email" do
+      expect(user.to_s).to eq(user.email)
+    end
+  end
 end

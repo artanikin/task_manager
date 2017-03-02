@@ -1,0 +1,20 @@
+.row
+  .col-lg-12
+    #tasks
+      - if @tasks.empty?
+        h2 There are no tasks
+      - else
+        table.table.table-striped
+          thead
+            tr
+              th #
+              th Created
+              th Name
+              th User
+          tbody
+            - @tasks.each do |task|
+              tr
+                td= task.id
+                td= task.created_at
+                td= task.name
+                td= task.user

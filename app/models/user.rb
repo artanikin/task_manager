@@ -11,6 +11,10 @@ class User < ApplicationRecord
     password == encrypt(pass) ? self : false
   end
 
+  def to_s
+    email
+  end
+
   private
 
   def set_encrypt_password
