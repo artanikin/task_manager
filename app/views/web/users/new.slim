@@ -1,9 +1,11 @@
-h1 Sign Up
+.row
+  .col-md-6
+    h1 Sign Up
 
-= render "shared/form_errors", obj: @user
+    = render "shared/form_errors", obj: @user
 
-= simple_form_for @user, html: { class: "form-horizontal" } do |f|
-  = f.input :email
-  = f.input :password
-  = f.input :password_confirmation, label: "Confirmation"
-  = f.button :submit, "Sign up"
+    = simple_form_for @user, html: { class: "form-horizontal" } do |f|
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation, label: "Confirmation"
+      = f.button :submit, "Sign up", class: "btn-primary"

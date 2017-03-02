@@ -8,5 +8,17 @@ html
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
 
   body
-    = render "shared/flash_messages"
-    = yield
+    nav.navbar.navbar-inverse.navbar-static-top
+      .container
+        .navbar-header
+          = link_to "TaskManager", root_path, class: "navbar-brand"
+        #navbar
+          ul.nav.navbar-nav
+            li= link_to "Home", root_path
+
+    .container
+      .row
+        .col-md-12
+          = render "shared/flash_messages"
+
+      = yield
