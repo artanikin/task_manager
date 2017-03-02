@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :tasks, dependent: :destroy
+
   validates :email, uniqueness: true, email: true
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }
   validates :role, inclusion: { in: %w(admin user) }
