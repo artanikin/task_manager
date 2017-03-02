@@ -14,7 +14,7 @@ feature "User sign in", %(
     fill_in "Password", with: "pass123"
     click_on "Sign in"
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(account_tasks_path)
     expect(page).to have_content("You successfully signed in")
   end
 
