@@ -11,8 +11,6 @@ feature "Home page", %(
     scenario "view all tasks in system" do
       visit root_path
 
-      expect(current_path).to eq(root_path)
-
       tasks.each do |task|
         within "#tasks" do
           expect(page).to have_content(task.id)
