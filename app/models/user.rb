@@ -16,6 +16,6 @@ class User < ApplicationRecord
   end
 
   def encrypt(password)
-    Digest::SHA1.hexdigest(password)
+    Digest::SHA1.hexdigest(password + Rails.application.secrets.salt)
   end
 end
