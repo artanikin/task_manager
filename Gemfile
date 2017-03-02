@@ -43,6 +43,7 @@ group :test do
   gem "shoulda-matchers", "~> 3.1"
   gem "capybara"
   gem "launchy"
+  gem "rack_session_access"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
