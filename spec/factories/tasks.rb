@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :task do
-    name "MyString"
-    description "MyText"
+    name Faker::Lorem.sentence
+    description Faker::Lorem.paragraph
     user
     state "new"
   end
