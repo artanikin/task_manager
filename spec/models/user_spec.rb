@@ -21,13 +21,13 @@ RSpec.describe User, type: :model do
     subject { build(:user) }
 
     it "should encrypt password before create user" do
-      expect(subject).to receive(:encrypt_password)
+      expect(subject).to receive(:set_encrypt_password)
       subject.save!
     end
 
     it "should not encrypt password before update user" do
       subject.save!
-      expect(subject).to_not receive(:encrypt_password)
+      expect(subject).to_not receive(:set_encrypt_password)
       subject.update(password: "321pass")
     end
 
@@ -35,6 +35,18 @@ RSpec.describe User, type: :model do
       password = subject.password
       subject.save!
       expect(subject.password).to_not eq(password)
+    end
+  end
+
+  describe "#authenticate" do
+    let(:user) { create(:user) }
+
+    it "return user when right password" do
+      expect(user.authenticate("pass123")).to eq(user)
+    end
+
+    it "return False when password wrong" do
+      expect(user.authenticate("wrong_pass")).to be_falsey
     end
   end
 end

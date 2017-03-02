@@ -8,6 +8,6 @@ class Web::ApplicationController < ApplicationController
   end
 
   def user_signed_in?
-    @current_user
+    current_user ? true : false
   end
 end

@@ -22,9 +22,9 @@ RSpec.describe Web::UsersController, type: :controller do
       expect{ subject }.to change(User, :count).by(1)
     end
 
-    it "redirect to root" do
+    it "redirect to sign in page" do
       subject
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to new_users_session_path
     end
 
     context "with invalid attributes" do

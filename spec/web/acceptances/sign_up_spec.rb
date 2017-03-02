@@ -5,7 +5,7 @@ feature "User sign up", %(
   As an user
   I want to be able to sign up
 ) do
-  before { visit new_user_path }
+  before { visit new_users_path }
 
   scenario "user can sign up" do
     fill_in "Email", with: "user@example.com"
@@ -13,8 +13,7 @@ feature "User sign up", %(
     fill_in "Confirmation", with: "pass123"
     click_on "Sign up"
 
-    # expect(current_path).to eq(new_user_path)
-    # expect(page).to have_content("Sign out")
+    expect(current_path).to eq(new_users_session_path)
     expect(page).to have_content("You successfully signed up")
   end
 
@@ -22,6 +21,7 @@ feature "User sign up", %(
     fill_in "Password", with: "pass123"
     fill_in "Confirmation", with: "pass123"
     click_on "Sign up"
+
     expect(page).to have_content("You are not signed up")
     expect(page).to have_content("Email is incorrect format")
   end

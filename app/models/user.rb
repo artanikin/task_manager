@@ -3,11 +3,19 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }
   validates :role, inclusion: { in: %w(admin user) }
 
-  before_create :encrypt_password
+  before_create :set_encrypt_password
+
+  def authenticate(pass)
+    password == encrypt(pass) ? self : false
+  end
 
   private
 
-  def encrypt_password
-    self.password = Digest::SHA1.hexdigest(password)
+  def set_encrypt_password
+    self.password = encrypt(password)
+  end
+
+  def encrypt(password)
+    Digest::SHA1.hexdigest(password)
   end
 end

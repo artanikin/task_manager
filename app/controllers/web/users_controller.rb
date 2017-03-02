@@ -7,7 +7,7 @@ class Web::UsersController < Web::ApplicationController
     @user = User.new(user_params.merge(role: "user"))
 
     if @user.save
-      redirect_to root_path, notice: "You successfully signed up"
+      redirect_to new_users_session_path, notice: "You successfully signed up"
     else
       flash[:alert] = "You are not signed up"
       render :new
