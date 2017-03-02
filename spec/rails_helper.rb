@@ -19,4 +19,11 @@ RSpec.configure do |config|
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
+
+  Shoulda::Matchers.configure do |c|
+    c.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 end
