@@ -18,7 +18,7 @@ feature "User sign up", %(
     expect(page).to have_content("You successfully signed up")
   end
 
-  scenario "user can not sign up with out email" do
+  scenario "user can not sign up without email" do
     fill_in "Password", with: "pass123"
     fill_in "Confirmation", with: "pass123"
     click_on "Sign up"
@@ -26,7 +26,7 @@ feature "User sign up", %(
     expect(page).to have_content("Email is incorrect format")
   end
 
-  scenario "user can not sign up with out password" do
+  scenario "user can not sign up without password" do
     fill_in "Email", with: "user@example.com"
     click_on "Sign up"
 
