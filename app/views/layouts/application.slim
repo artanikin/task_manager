@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title TaskManager
+    = csrf_meta_tags
+
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+
+  body
+    nav.navbar.navbar-inverse.navbar-static-top
+      .container
+        .navbar-header
+          = link_to "TaskManager", root_path, class: "navbar-brand"
+        #navbar
+          ul.nav.navbar-nav.pull-right
+            - if user_signed_in?
+              li.navbar-text= "Signed in as #{current_user.email}"
+              li= link_to "Sign Out", destroy_users_session_path, method: :delete
+            - else
+              li= link_to "Sign In", new_users_session_path
+              |
+              li= link_to "Sign Up", new_users_path
+
+    .container
+      .row
+        .col-md-12
+          = render "shared/flash_messages"
+
+      = yield
