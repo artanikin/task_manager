@@ -13,8 +13,14 @@ html
         .navbar-header
           = link_to "TaskManager", root_path, class: "navbar-brand"
         #navbar
-          ul.nav.navbar-nav
-            li= link_to "Home", root_path
+          ul.nav.navbar-nav.pull-right
+            - if user_signed_in?
+              li= link_to "Sign In", root_path
+              |
+              li= link_to "Sign Up", root_path
+            - else
+              li.navbar-text= "Signed in as #{current_user.email}"
+              li= link_to "Sign Out", root_path
 
     .container
       .row
