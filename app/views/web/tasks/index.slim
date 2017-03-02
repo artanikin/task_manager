@@ -12,9 +12,4 @@
               th Name
               th User
           tbody
-            - @tasks.each do |task|
-              tr
-                td= task.id
-                td= task.created_at
-                td= task.name
-                td= task.user
+            = render @tasks
