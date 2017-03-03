@@ -3,7 +3,11 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   before_action :check_task_editable!, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks
+    if current_user.admin?
+      @tasks = Task.all
+    else
+      @tasks = current_user.tasks
+    end
   end
 
   def new

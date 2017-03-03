@@ -21,6 +21,24 @@ RSpec.describe Web::Account::TasksController, type: :controller do
       end
     end
 
+    context "authenticated admin user" do
+      let(:admin_tasks) { create_list(:task, 2, user: user) }
+      let(:another_user_tasks) { create_list(:task, 2) }
+
+      sign_in_user("admin")
+
+      before { subject }
+
+      it "populates array of all tasks" do
+        all_tasks = admin_tasks + another_user_tasks
+        expect(assigns(:tasks)).to match_array(all_tasks)
+      end
+
+      it "render index view" do
+        expect(response).to render_template(:index)
+      end
+    end
+
     context "not authenticated user" do
       it "redirect_to sign in page" do
         subject
