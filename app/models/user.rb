@@ -11,6 +11,10 @@ class User < ApplicationRecord
     password == encrypt(pass) ? self : false
   end
 
+  def admin?
+    role == "admin"
+  end
+
   def to_s
     email
   end
