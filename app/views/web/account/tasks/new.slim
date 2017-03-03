@@ -1,0 +1,10 @@
+.row
+  .col-md-6
+    h1 New task
+
+    = render "shared/form_errors", obj: @user
+
+    = simple_form_for ["account", @task], html: { class: "form-horizontal" } do |f|
+      = f.input :name, autofocus: true
+      = f.input :description
+      = f.button :submit, "Create", class: "btn-primary"
