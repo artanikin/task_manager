@@ -1,6 +1,10 @@
 require "rails_helper"
+require "rack_session_access/capybara"
+require "puma"
 
 RSpec.configure do |config|
+  config.include AcceptanceHelper, type: :feature
+
   Capybara.server_host = "0.0.0.0"
   Capybara.server_port = 3001
   Capybara.default_max_wait_time = 2

@@ -5,7 +5,7 @@ feature "User sign in", %(
   As an register user
   I want to be able to Sign in
 ) do
-  given(:user) { create(:user, password: "pass123") }
+  given(:user) { create(:user) }
 
   before { visit new_users_session_path }
 
@@ -14,7 +14,7 @@ feature "User sign in", %(
     fill_in "Password", with: "pass123"
     click_on "Sign in"
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(account_tasks_path)
     expect(page).to have_content("You successfully signed in")
   end
 

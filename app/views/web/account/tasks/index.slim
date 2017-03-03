@@ -1,0 +1,20 @@
+.row
+  .col-lg-12
+    p= link_to "New task", new_account_task_path, class: "btn btn-primary"
+.row
+  .col-lg-12
+    #tasks
+      - if @tasks.empty?
+        h2 There are no tasks
+      - else
+        table.table.table-striped
+          thead
+            tr
+              th #
+              th Name
+              th Description
+              th State
+              th Created
+              th/
+          tbody
+            = render @tasks

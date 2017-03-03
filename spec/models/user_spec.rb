@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "#authenticate" do
-    let(:user) { create(:user, password: "pass123") }
+    let(:user) { create(:user) }
 
     it "return user when right password" do
       expect(user.authenticate("pass123")).to eq(user)
