@@ -16,6 +16,7 @@ feature "Users tasks", %(
 
       expect(page).to have_link("New task")
       expect(page).to have_link("Edit")
+      expect(page).to have_link("Delete")
 
       within "#tasks" do
         expect(page).to have_css("tbody tr", count: 2)

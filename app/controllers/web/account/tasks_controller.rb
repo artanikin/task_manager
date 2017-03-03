@@ -1,6 +1,6 @@
 class Web::Account::TasksController < Web::Account::ApplicationController
-  before_action :set_task, only: [:edit, :update]
-  before_action :check_task_editable!, only: [:edit, :update]
+  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :check_task_editable!, only: [:edit, :update, :destroy]
 
   def index
     @tasks = current_user.tasks
@@ -30,6 +30,11 @@ class Web::Account::TasksController < Web::Account::ApplicationController
       flash[:alert] = "Task not updated"
       render :edit
     end
+  end
+
+  def destroy
+    @task.destroy
+    redirect_to account_tasks_path, notice: "Task was successfully deleted"
   end
 
   private

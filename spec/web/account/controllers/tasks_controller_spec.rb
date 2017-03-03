@@ -195,4 +195,49 @@ RSpec.describe Web::Account::TasksController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let!(:task) { create(:task) }
+
+    subject { delete :destroy, params: { id: task } }
+
+    describe "authenticated user" do
+      sign_in_user
+
+      context "assigned user" do
+        before { task.update(user: user) }
+
+        it "delete tasks" do
+          expect{ subject }.to change(user.tasks, :count).by(-1)
+        end
+
+        it "redirect to account tasks list" do
+          subject
+          expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+
+      context "not assigned user" do
+        it "can not delete task" do
+          expect{ subject }.to_not change(Task, :count)
+        end
+
+        it "redirect to account tasks list" do
+          subject
+          expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+    end
+
+    describe "not authenticated user" do
+      it "can not delete task" do
+        expect{ subject }.to_not change(Task, :count)
+      end
+
+      it "redirect to sign in form" do
+        subject
+        expect(response).to redirect_to(new_users_session_path)
+      end
+    end
+  end
 end
