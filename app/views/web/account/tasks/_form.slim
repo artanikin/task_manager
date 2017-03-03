@@ -3,4 +3,6 @@
 = simple_form_for ["account", task], html: { class: "form-horizontal" } do |f|
   = f.input :name, autofocus: true
   = f.input :description
+  - if current_user.admin?
+    = f.association :user
   = f.button :submit, "Save", class: "btn-primary"
