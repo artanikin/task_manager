@@ -5,4 +5,8 @@ FactoryGirl.define do
     user
     state "new"
   end
+
+  factory :invalid_task, class: "User" do
+    name nil
+  end
 end
