@@ -1,5 +1,8 @@
 .row
   .col-lg-12
+    p= link_to "New task", new_account_task_path, class: "btn btn-primary"
+.row
+  .col-lg-12
     #tasks
       - if @tasks.empty?
         h2 There are no tasks

@@ -14,6 +14,8 @@ feature "Users tasks", %(
     scenario "see all assigned tasks" do
       visit account_tasks_path
 
+      expect(page).to have_link("New task")
+
       within "#tasks" do
         expect(page).to have_css("tbody tr", count: 2)
 
