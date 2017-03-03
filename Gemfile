@@ -44,6 +44,7 @@ group :test do
   gem "capybara"
   gem "launchy"
   gem "rack_session_access"
+  gem "fuubar"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
