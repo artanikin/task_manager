@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20170302171223) do
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password"
-    t.string   "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "role",       default: "user"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
