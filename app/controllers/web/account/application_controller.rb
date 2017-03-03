@@ -4,6 +4,6 @@ class Web::Account::ApplicationController < Web::ApplicationController
   private
 
   def authenticate_user!
-    redirect_to new_users_session_path unless user_signed_in?
+    redirect_to new_users_session_path, alert: "Please, sign in" unless user_signed_in?
   end
 end

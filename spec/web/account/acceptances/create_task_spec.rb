@@ -16,7 +16,7 @@ feature "Create new task", %(
 
       fill_in "Name", with: task_attributes[:name]
       fill_in "Description", with: task_attributes[:description]
-      click_on "Create"
+      click_on "Save"
 
       expect(current_path).to eq(account_tasks_path)
       expect(page).to have_content("Task was successfully created")

@@ -92,4 +92,107 @@ RSpec.describe Web::Account::TasksController, type: :controller do
       end
     end
   end
+
+  describe "GET #edit" do
+    let!(:task) { create(:task) }
+
+    subject { get :edit, params: { id: task } }
+
+    context "authenticated user" do
+      sign_in_user
+
+      context "assigned user to task" do
+        before do
+          task.update(user_id: user.id)
+          subject
+        end
+
+        it "assigns Task to @task" do
+          subject
+          expect(assigns(:task)).to eq(task)
+        end
+
+        it "render view edit" do
+          subject
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context "not assigned user to task" do
+        it "redirect to account tasks list" do
+          subject
+          expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+    end
+
+    context "not authenticated user" do
+      it "redirect_to sign in page" do
+        subject
+        expect(response).to redirect_to(new_users_session_path)
+      end
+    end
+  end
+
+  describe "PATCH #update" do
+    let!(:task) { create(:task, name: "Name placeholder", description: "Desc placeholder") }
+    let(:parameters) do
+      { id: task, task: { name: "Changed name", description: "Changed description" } }
+    end
+
+    subject { patch :update, params: parameters }
+
+    context "authenticated user" do
+      sign_in_user
+
+      context "assigned user to task" do
+        before do
+          task.update(user: user)
+          subject
+        end
+
+        it "changed task attributes" do
+          task.reload
+          expect(task.name).to eq(parameters[:task][:name])
+          expect(task.description).to eq(parameters[:task][:description])
+        end
+
+        it "redirect to account task list" do
+          expect(response).to redirect_to(account_tasks_path)
+        end
+
+        context "with invalid params" do
+          let(:parameters) { { id: task, task: { name: nil } } }
+
+          it "can not change task attributes" do
+            task.reload
+            expect(task.name).to eq("Name placeholder")
+            expect(task.description).to eq("Desc placeholder")
+          end
+        end
+      end
+
+      context "not assigned user to task" do
+        before { subject }
+
+        it "can not change task attributes" do
+          task.reload
+          expect(task.name).to eq("Name placeholder")
+          expect(task.description).to eq("Desc placeholder")
+        end
+
+        it "redirect to account tasks list" do
+          subject
+          expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+    end
+
+    context "not authenticated user" do
+      it "redirect_to sign in page" do
+        subject
+        expect(response).to redirect_to(new_users_session_path)
+      end
+    end
+  end
 end
