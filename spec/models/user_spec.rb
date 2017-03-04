@@ -59,4 +59,17 @@ RSpec.describe User, type: :model do
       expect(user.to_s).to eq(user.email)
     end
   end
+
+  describe "#admin?" do
+    let(:user) { create(:user) }
+    let(:admin_user) { create(:user, role: "admin") }
+
+    it "return true" do
+      expect(admin_user.admin?).to be_truthy
+    end
+
+    it "return false" do
+      expect(user.admin?).to be_falsey
+    end
+  end
 end

@@ -21,6 +21,24 @@ RSpec.describe Web::Account::TasksController, type: :controller do
       end
     end
 
+    context "authenticated admin user" do
+      let(:admin_tasks) { create_list(:task, 2, user: user) }
+      let(:another_user_tasks) { create_list(:task, 2) }
+
+      sign_in_user("admin")
+
+      before { subject }
+
+      it "populates array of all tasks" do
+        all_tasks = admin_tasks + another_user_tasks
+        expect(assigns(:tasks)).to match_array(all_tasks)
+      end
+
+      it "render index view" do
+        expect(response).to render_template(:index)
+      end
+    end
+
     context "not authenticated user" do
       it "redirect_to sign in page" do
         subject
@@ -55,6 +73,7 @@ RSpec.describe Web::Account::TasksController, type: :controller do
   end
 
   describe "POST #create" do
+    let(:bob) { create(:user) }
     let(:parameters) { { task: attributes_for(:task) } }
 
     subject { post :create, params: parameters }
@@ -62,8 +81,13 @@ RSpec.describe Web::Account::TasksController, type: :controller do
     context "authenticated user" do
       sign_in_user
 
-      it "create new task for user" do
+      it "create new task" do
         expect{ subject }.to change(user.tasks, :count).by(1)
+      end
+
+      it "can not assign task for another user" do
+        parameters = { task: attributes_for(:task, user_id: bob) }
+        expect{ subject }.to_not change(bob.tasks, :count)
       end
 
       it "redirect to user tasks list" do
@@ -81,6 +105,17 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         it "re-render view new task form" do
           subject
           expect(response).to render_template(:new)
+        end
+      end
+
+      context "as an admin" do
+        let(:parameters) { { task: attributes_for(:task, user_id: bob) } }
+
+        before { user.update(role: "admin") }
+
+        it "can assign task to another user" do
+          user.reload
+          expect{ subject }.to change(bob.tasks, :count)
         end
       end
     end
@@ -108,12 +143,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         end
 
         it "assigns Task to @task" do
-          subject
           expect(assigns(:task)).to eq(task)
         end
 
         it "render view edit" do
-          subject
           expect(response).to render_template(:edit)
         end
       end
@@ -122,6 +155,13 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         it "redirect to account tasks list" do
           subject
           expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+
+      context "admin user" do
+        it "assigns Task to @task" do
+          subject
+          expect(assigns(:task)).to eq(task)
         end
       end
     end
@@ -157,6 +197,18 @@ RSpec.describe Web::Account::TasksController, type: :controller do
           expect(task.description).to eq(parameters[:task][:description])
         end
 
+        it "can not assigning task to another user" do
+          john = create(:user)
+          parameters = { id: task,
+             task: { name: "Changed name", description: "Changed description", user_id: john } }
+          subject
+          task.reload
+
+          expect(task.name).to eq(parameters[:task][:name])
+          expect(task.description).to eq(parameters[:task][:description])
+          expect(task.user).to eq(user)
+        end
+
         it "redirect to account task list" do
           expect(response).to redirect_to(account_tasks_path)
         end
@@ -184,6 +236,24 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         it "redirect to account tasks list" do
           subject
           expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+
+      context "admin user" do
+        let(:john) { create(:user) }
+        let(:parameters) do { id: task,
+            task: { name: "Changed name", description: "Changed description", user_id: john } }
+        end
+
+        sign_in_user("admin")
+
+        it "assigned user to task" do
+          subject
+          task.reload
+
+          expect(task.name).to eq(parameters[:task][:name])
+          expect(task.description).to eq(parameters[:task][:description])
+          expect(task.user).to eq(john)
         end
       end
     end
@@ -214,6 +284,14 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         it "redirect to account tasks list" do
           subject
           expect(response).to redirect_to(account_tasks_path)
+        end
+      end
+
+      context "admin user" do
+        sign_in_user("admin")
+
+        it "can delete another user tasks" do
+          expect{ subject }.to change(Task, :count)
         end
       end
 

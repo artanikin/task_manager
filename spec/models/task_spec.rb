@@ -19,4 +19,23 @@ RSpec.describe Task, type: :model do
       expect(task.assigned?(user)).to be_truthy
     end
   end
+
+  describe "#editable?" do
+    let(:assigned_user) { create(:user) }
+    let(:admin_user) { create(:user, role: "admin") }
+    let(:another_user) { create(:user) }
+    let(:task) { create(:task, user: assigned_user) }
+
+    it "should return true for admin user" do
+      expect(task.editable?(admin_user)).to be_truthy
+    end
+
+    it "should return true for assigned user" do
+      expect(task.editable?(assigned_user)).to be_truthy
+    end
+
+    it "should return true for not assigned user" do
+      expect(task.editable?(another_user)).to be_falsey
+    end
+  end
 end

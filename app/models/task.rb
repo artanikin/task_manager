@@ -7,4 +7,8 @@ class Task < ApplicationRecord
   def assigned?(human)
     user == human
   end
+
+  def editable?(human)
+    user == human || human.admin?
+  end
 end

@@ -3,7 +3,11 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   before_action :check_task_editable!, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks
+    if current_user.admin?
+      @tasks = Task.all
+    else
+      @tasks = current_user.tasks
+    end
   end
 
   def new
@@ -11,7 +15,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   end
 
   def create
-    @task = Task.new(task_params.merge(user_id: current_user.id))
+    @task = Task.new(filtered_params)
 
     if @task.save
       redirect_to account_tasks_path, notice: "Task was successfully created"
@@ -40,7 +44,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:name, :description, :user_id)
   end
 
   def set_task
@@ -48,7 +52,11 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   end
 
   def check_task_editable!
-    message = "You can`t edit this task"
-    redirect_to account_tasks_path, alert: message unless @task.assigned?(current_user)
+    message = "You can't edit this task"
+    redirect_to account_tasks_path, alert: message unless @task.editable?(current_user)
+  end
+
+  def filtered_params
+    current_user.admin? ? task_params : task_params.merge(user_id: current_user.id)
   end
 end
