@@ -287,6 +287,14 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         end
       end
 
+      context "admin user" do
+        sign_in_user("admin")
+
+        it "can delete another user tasks" do
+          expect{ subject }.to change(Task, :count)
+        end
+      end
+
       context "not assigned user" do
         it "can not delete task" do
           expect{ subject }.to_not change(Task, :count)

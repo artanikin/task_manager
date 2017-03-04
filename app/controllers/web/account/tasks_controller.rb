@@ -52,7 +52,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   end
 
   def check_task_editable!
-    message = "You can`t edit this task"
+    message = "You can't edit this task"
     redirect_to account_tasks_path, alert: message unless @task.editable?(current_user)
   end
 
