@@ -5,6 +5,8 @@ class Task < ApplicationRecord
   validates :name, presence: true
   validates :state, inclusion: { in: %w(new started finished) }
 
+  accepts_nested_attributes_for :attachment
+
   def assigned?(human)
     user == human
   end

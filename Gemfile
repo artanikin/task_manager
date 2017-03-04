@@ -14,7 +14,7 @@ gem "coffee-rails", "~> 4.2"
 gem "slim-rails"
 gem "bootstrap-sass", "~> 3.3.6"
 gem "simple_form"
-gem "carrierwave", "~> 1.0"
+gem "carrierwave"
 
 gem "jquery-rails"
 gem "turbolinks", "~> 5"

@@ -256,7 +256,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   capybara
-  carrierwave (~> 1.0)
+  carrierwave
   coffee-rails (~> 4.2)
   database_cleaner
   factory_girl_rails

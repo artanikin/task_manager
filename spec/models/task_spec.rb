@@ -2,10 +2,12 @@ require "rails_helper"
 
 RSpec.describe Task, type: :model do
   it { should belong_to(:user) }
-  it { should have_one(:attachment).dependent(:destroy) }
+  it { should have_one(:attachment) }
 
   it { should validate_presence_of(:name) }
   it { should validate_inclusion_of(:state).in_array(%w(new started finished)) }
+
+  it { should accept_nested_attributes_for(:attachment) }
 
   describe "#assigned?" do
     let!(:user) { create(:user) }
