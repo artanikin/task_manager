@@ -13,6 +13,11 @@ html
         .navbar-header
           = link_to "TaskManager", root_path, class: "navbar-brand"
         #navbar
+          ul.nav.navbar-nav
+              li= link_to "All tasks", root_path
+              - if user_signed_in?
+                li= link_to "Personal tasks", account_tasks_path
+        #navbar
           ul.nav.navbar-nav.pull-right
             - if user_signed_in?
               li.navbar-text= "Signed in as #{current_user.email}"
