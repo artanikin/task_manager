@@ -7,6 +7,16 @@ class Task < ApplicationRecord
 
   accepts_nested_attributes_for :attachment, allow_destroy: true
 
+  state_machine initial: :new do
+    event :start do
+      transition new: :started
+    end
+
+    event :finish do
+      transition started: :finished
+    end
+  end
+
   def assigned?(human)
     user == human
   end

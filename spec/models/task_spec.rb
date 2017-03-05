@@ -9,6 +9,12 @@ RSpec.describe Task, type: :model do
 
   it { should accept_nested_attributes_for(:attachment).allow_destroy(true) }
 
+  it { should have_states :new, :started, :finished }
+  it { should handle_events :start, when: :new }
+  it { should handle_events :finish, when: :started }
+  it { should reject_events :finish, when: :new }
+  it { should reject_events :start, when: :finished }
+
   describe "#assigned?" do
     let!(:user) { create(:user) }
     let!(:task) { create(:task) }

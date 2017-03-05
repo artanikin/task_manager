@@ -12,6 +12,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include StateMachinesRspec::Matchers
   config.extend ControllerMacros, type: :controller
 
   config.use_transactional_fixtures = true

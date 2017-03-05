@@ -15,6 +15,7 @@ gem "slim-rails"
 gem "bootstrap-sass", "~> 3.3.6"
 gem "simple_form"
 gem "carrierwave"
+gem "state_machines-activerecord"
 
 gem "jquery-rails"
 gem "turbolinks", "~> 5"
@@ -46,6 +47,7 @@ group :test do
   gem "launchy"
   gem "rack_session_access"
   gem "fuubar"
+  gem "state_machines_rspec"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
