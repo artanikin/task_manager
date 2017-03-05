@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     end
 
     namespace :account do
-      resources :tasks
+      resources :tasks do
+        resources :states, only: :update
+      end
     end
   end
 end

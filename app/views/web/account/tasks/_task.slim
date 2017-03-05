@@ -8,6 +8,9 @@ tr
     td= task.user
   td
     nobr
+      - unless task.state_events.empty?
+        - task.state_events.each do |event|
+          p= link_to event, account_task_state_path(task, event), method: :patch, class: "btn btn-success btn-xs"
       = link_to "Edit", edit_account_task_path(task), class: "btn btn-info btn-xs"
       | &nbsp;
       = link_to "Delete", account_task_path(task), method: :delete,
