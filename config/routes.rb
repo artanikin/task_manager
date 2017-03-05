@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
 
     namespace :account do
-      resources :tasks, only: [:index, :new, :create, :edit, :update, :destroy]
+      resources :tasks
     end
   end
 end

@@ -47,6 +47,60 @@ RSpec.describe Web::Account::TasksController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    let(:user) { create(:user) }
+    let(:task) { create(:task) }
+
+    subject { get :show, params: { id: task } }
+
+    context "authenticated assigned user" do
+      sign_in_user
+
+      before do
+        task.update(user: user)
+        subject
+      end
+
+      it "assigns to @task" do
+        expect(assigns(:task)).to eq(task)
+      end
+
+      it "render show" do
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context "authenticated not assigned user" do
+      sign_in_user
+
+      it "redirect to list of his tasks" do
+        subject
+        expect(response).to redirect_to(account_tasks_path)
+      end
+    end
+
+    context "authenticated as admin user" do
+      sign_in_user("admin")
+
+      before { subject }
+
+      it "assigns to @task" do
+        expect(assigns(:task)).to eq(task)
+      end
+
+      it "render show" do
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context "not authenticated user" do
+      it "redirect_to sign in page" do
+        subject
+        expect(response).to redirect_to(new_users_session_path)
+      end
+    end
+  end
+
   describe "GET #new" do
     subject { get :new }
 
