@@ -48,6 +48,7 @@ group :test do
   gem "rack_session_access"
   gem "fuubar"
   gem "state_machines_rspec"
+  gem "simplecov", require: false
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
