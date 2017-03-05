@@ -1,1 +1,20 @@
-= @task.inspect
+.row
+  .col-md-8
+    .task-card
+      h1 = @task.name
+      dl.dl-horizontal
+        dt Id
+        dd = @task.id
+
+        dt Description
+        dd = @task.description
+
+        dt Created
+        dd = @task.created_at
+
+        - if current_user.admin?
+          dt User
+          dd = @task.user
+
+        dt File
+        dd = @task.attachment
