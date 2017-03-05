@@ -1,6 +1,6 @@
 tr
   td= task.id
-  td= task.name
+  td= link_to task.name, account_task_path(task)
   td= task.description
   td= task.state
   td= task.created_at

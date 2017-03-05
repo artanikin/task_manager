@@ -1,6 +1,6 @@
 class Web::Account::TasksController < Web::Account::ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
-  before_action :check_task_editable!, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :check_task_editable!, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_user.admin?
@@ -9,6 +9,8 @@ class Web::Account::TasksController < Web::Account::ApplicationController
       @tasks = current_user.tasks
     end
   end
+
+  def show; end
 
   def new
     @task = Task.new

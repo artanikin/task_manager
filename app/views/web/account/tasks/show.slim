@@ -1,0 +1,25 @@
+.row
+  .col-md-8
+    .task-card
+      h1 = @task.name
+      dl.dl-horizontal
+        dt Id
+        dd = @task.id
+
+        dt Description
+        dd = @task.description
+
+        dt Created
+        dd = @task.created_at
+
+        - if current_user.admin?
+          dt User
+          dd = @task.user
+
+        - if @task.attachment
+          dt File
+          dd
+            - if @task.attachment.image?
+              = image_tag @task.attachment.file.url
+            - else
+              = link_to @task.attachment.file.identifier, @task.attachment.file.url
