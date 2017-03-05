@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ApplicationHelper do
+RSpec.describe ApplicationHelper, type: :helper do
   describe "#name_flash_method" do
     %w(alert error).each do |method|
       it "return '#{method}'" do
