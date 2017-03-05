@@ -12,6 +12,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
 
   def new
     @task = Task.new
+    @task.build_attachment
   end
 
   def create
@@ -44,7 +45,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :user_id)
+    params.require(:task).permit(:name, :description, :user_id, attachment_attributes: [:id, :file])
   end
 
   def set_task

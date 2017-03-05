@@ -1,8 +1,11 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_one :attachment, inverse_of: :task
 
   validates :name, presence: true
   validates :state, inclusion: { in: %w(new started finished) }
+
+  accepts_nested_attributes_for :attachment, allow_destroy: true
 
   def assigned?(human)
     user == human
