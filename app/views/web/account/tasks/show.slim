@@ -16,5 +16,10 @@
           dt User
           dd = @task.user
 
-        dt File
-        dd = @task.attachment
+        - if @task.attachment
+          dt File
+          dd
+            - if @task.attachment.image?
+              = image_tag @task.attachment.file.url
+            - else
+              = link_to @task.attachment.file.identifier, @task.attachment.file.url
