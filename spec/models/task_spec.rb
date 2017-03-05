@@ -7,7 +7,7 @@ RSpec.describe Task, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_inclusion_of(:state).in_array(%w(new started finished)) }
 
-  it { should accept_nested_attributes_for(:attachment) }
+  it { should accept_nested_attributes_for(:attachment).allow_destroy(true) }
 
   describe "#assigned?" do
     let!(:user) { create(:user) }
