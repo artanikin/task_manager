@@ -21,6 +21,8 @@ gem "jquery-rails"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
 
+gem "faker"
+
 group :development, :test do
   gem "pry-rails"
   gem "pry-byebug"
@@ -28,7 +30,6 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "database_cleaner"
   gem "spring-commands-rspec"
-  gem "faker"
 end
 
 group :development do
