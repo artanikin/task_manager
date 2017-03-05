@@ -3,7 +3,7 @@ tr
   td= link_to task.name, account_task_path(task)
   td= task.description
   td= task.state
-  td= task.created_at
+  td= l task.created_at.localtime, format: :short
   - if current_user.admin?
     td= task.user
   td

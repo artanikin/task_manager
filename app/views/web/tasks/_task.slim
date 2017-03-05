@@ -1,5 +1,5 @@
 tr
   td= task.id
-  td= task.created_at
+  td= l task.created_at.localtime, format: :short
   td= task.name
   td= task.user

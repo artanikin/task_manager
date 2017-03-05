@@ -28,7 +28,7 @@ feature "Users tasks", %(
           expect(page).to have_content(task.name)
           expect(page).to have_content(task.description)
           expect(page).to have_content(task.state)
-          expect(page).to have_content(task.created_at)
+          expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
         end
       end
     end
@@ -54,7 +54,7 @@ feature "Users tasks", %(
           expect(page).to have_content(task.name)
           expect(page).to have_content(task.description)
           expect(page).to have_content(task.state)
-          expect(page).to have_content(task.created_at)
+          expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
           expect(page).to have_content(task.user)
         end
       end

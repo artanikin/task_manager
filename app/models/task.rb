@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :user
-  has_one :attachment, inverse_of: :task
+  has_one :attachment, inverse_of: :task, dependent: :destroy
 
   validates :name, presence: true
   validates :state, inclusion: { in: %w(new started finished) }

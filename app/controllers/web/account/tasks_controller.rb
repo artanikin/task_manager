@@ -4,9 +4,9 @@ class Web::Account::TasksController < Web::Account::ApplicationController
 
   def index
     if current_user.admin?
-      @tasks = Task.all
+      @tasks = Task.all.order("created_at DESC")
     else
-      @tasks = current_user.tasks
+      @tasks = current_user.tasks.order("created_at DESC")
     end
   end
 

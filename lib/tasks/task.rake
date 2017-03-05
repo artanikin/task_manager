@@ -24,11 +24,14 @@ namespace :task do
 
   def create_task(users_ids)
     states = %w(new started finished)
+    files = %w(ruby.jpeg simple.txt)
+
     params = {
       name: Faker::Lorem.sentence,
       description: Faker::Lorem.paragraph,
       user_id: users_ids.sample,
-      state: states.sample
+      state: states.sample,
+      attachment_attributes: { file: File.open("#{Rails.root}/spec/files/#{files.sample}") }
     }
 
     Task.new(params).save

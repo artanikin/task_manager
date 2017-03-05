@@ -19,7 +19,7 @@ feature "Task card", %(
         expect(page).to have_content(task.id)
         expect(page).to have_content(task.name)
         expect(page).to have_content(task.description)
-        expect(page).to have_content(task.created_at)
+        expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
         expect(page).to_not have_content(task.user)
       end
     end
@@ -35,7 +35,7 @@ feature "Task card", %(
         expect(page).to have_content(task.id)
         expect(page).to have_content(task.name)
         expect(page).to have_content(task.description)
-        expect(page).to have_content(task.created_at)
+        expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
         expect(page).to have_content(task.user)
       end
     end
