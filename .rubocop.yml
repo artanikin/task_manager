@@ -15,9 +15,6 @@ AllCops:
 Rails:
   Enabled: true
 
-Style/ClassAndModuleChildren:
-  Enable: false
-
 Style/NumericLiterals:
   Exclude:
     - "db/schema.rb"
