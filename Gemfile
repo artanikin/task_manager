@@ -16,6 +16,7 @@ gem "bootstrap-sass", "~> 3.3.6"
 gem "simple_form"
 gem "carrierwave"
 gem "state_machines-activerecord"
+gem "responders"
 
 gem "jquery-rails"
 gem "turbolinks", "~> 5"
