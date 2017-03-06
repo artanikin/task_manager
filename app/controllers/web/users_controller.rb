@@ -1,17 +1,11 @@
 class Web::UsersController < Web::ApplicationController
   def new
-    @user = User.new
+    respond_with(@user = User.new)
   end
 
   def create
-    @user = User.new(user_params.merge(role: "user"))
-
-    if @user.save
-      redirect_to new_users_session_path, notice: "You successfully signed up"
-    else
-      flash[:alert] = "You are not signed up"
-      render :new
-    end
+    respond_with(@user = User.create(user_params.merge(role: "user")),
+                 location: -> { new_users_session_path })
   end
 
   private
