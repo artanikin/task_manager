@@ -1,15 +1,15 @@
 namespace :task do
   desc "Creates fake task object"
-  task :create, [:count] =>  :environment do |t, args|
+  task :create, [:count] => :environment do |_, args|
     args.with_defaults(count: 1)
     count = args[:count].to_i
     counter = 0
-    users_ids = get_users_ids
+    users_ids = all_users_ids
 
     abort("Error! Count must be Integer and greater than 0") if count < 1
     abort("No users in database") if users_ids.empty?
 
-    count.times do |n|
+    count.times do
       counter += 1 if create_task(users_ids)
     end
 
@@ -18,7 +18,7 @@ namespace :task do
 
   private
 
-  def get_users_ids
+  def all_users_ids
     User.pluck(:id)
   end
 
