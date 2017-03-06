@@ -1,4 +1,4 @@
-class TaskDecorator < Draper::Decorator
+class TaskDecorator < Drape::Decorator
   delegate_all
 
   def created
