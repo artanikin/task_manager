@@ -7,6 +7,8 @@ RSpec.describe Web::Account::TasksController, type: :controller do
 
     subject { get :index }
 
+    it_behaves_like "Not authenticated user"
+
     context "authenticated user" do
       sign_in_user
 
@@ -38,13 +40,6 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         expect(response).to render_template(:index)
       end
     end
-
-    context "not authenticated user" do
-      it "redirect_to sign in page" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
-      end
-    end
   end
 
   describe "GET #show" do
@@ -52,6 +47,8 @@ RSpec.describe Web::Account::TasksController, type: :controller do
     let(:task) { create(:task) }
 
     subject { get :show, params: { id: task } }
+
+    it_behaves_like "Not authenticated user"
 
     context "authenticated assigned user" do
       sign_in_user
@@ -92,17 +89,12 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         expect(response).to render_template(:show)
       end
     end
-
-    context "not authenticated user" do
-      it "redirect_to sign in page" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
-      end
-    end
   end
 
   describe "GET #new" do
     subject { get :new }
+
+    it_behaves_like "Not authenticated user"
 
     context "authenticated user" do
       sign_in_user
@@ -117,13 +109,6 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         expect(response).to render_template(:new)
       end
     end
-
-    context "not authenticated user" do
-      it "redirect_to sign in page" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
-      end
-    end
   end
 
   describe "POST #create" do
@@ -131,6 +116,8 @@ RSpec.describe Web::Account::TasksController, type: :controller do
     let(:parameters) { { task: attributes_for(:task) } }
 
     subject { post :create, params: parameters }
+
+    it_behaves_like "Not authenticated user"
 
     context "authenticated user" do
       sign_in_user
@@ -173,19 +160,14 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         end
       end
     end
-
-    context "not authenticated user" do
-      it "redirect_to sign in page" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
-      end
-    end
   end
 
   describe "GET #edit" do
     let!(:task) { create(:task) }
 
     subject { get :edit, params: { id: task } }
+
+    it_behaves_like "Not authenticated user"
 
     context "authenticated user" do
       sign_in_user
@@ -219,13 +201,6 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         end
       end
     end
-
-    context "not authenticated user" do
-      it "redirect_to sign in page" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
-      end
-    end
   end
 
   describe "PATCH #update" do
@@ -235,6 +210,8 @@ RSpec.describe Web::Account::TasksController, type: :controller do
     end
 
     subject { patch :update, params: parameters }
+
+    it_behaves_like "Not authenticated user"
 
     context "authenticated user" do
       sign_in_user
@@ -311,13 +288,6 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         end
       end
     end
-
-    context "not authenticated user" do
-      it "redirect_to sign in page" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
-      end
-    end
   end
 
   describe "DELETE #destroy" do
@@ -362,13 +332,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
     end
 
     describe "not authenticated user" do
+      it_behaves_like "Not authenticated user"
+
       it "can not delete task" do
         expect{ subject }.to_not change(Task, :count)
-      end
-
-      it "redirect to sign in form" do
-        subject
-        expect(response).to redirect_to(new_users_session_path)
       end
     end
   end
