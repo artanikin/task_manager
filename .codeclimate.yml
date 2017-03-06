@@ -20,7 +20,7 @@ engines:
     enabled: true
     checks:
       Rubocop/Style/ClassAndModuleChildren:
-        enable: false
+        enabled: false
 ratings:
   paths:
   - Gemfile.lock
