@@ -10,6 +10,10 @@ RSpec.describe Web::TasksController, type: :controller do
       expect(assigns(:tasks)).to match_array(tasks)
     end
 
+    it "should be decorate tasks" do
+      expect(assigns(:tasks)).to be_decorated
+    end
+
     it "render index view" do
       expect(response).to render_template(:index)
     end

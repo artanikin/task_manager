@@ -7,7 +7,7 @@ feature "Home page", %(
 ) do
 
   feature "tasks was created" do
-    given!(:tasks) { create_list(:task, 2) }
+    given!(:tasks) { TaskDecorator.decorate_collection(create_list(:task, 2)) }
 
     scenario "view all tasks in system" do
       visit root_path
@@ -15,7 +15,7 @@ feature "Home page", %(
       tasks.each do |task|
         within "#tasks" do
           expect(page).to have_content(task.id)
-          expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
+          expect(page).to have_content(task.created)
           expect(page).to have_content(task.name)
           expect(page).to have_content(task.user)
         end

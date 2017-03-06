@@ -7,8 +7,8 @@ feature "Users tasks", %(
 ) do
   given!(:user) { create(:user) }
   given!(:admin) { create(:user, role: "admin") }
-  given!(:tasks) { create_list(:task, 2, user: user) }
-  given!(:admin_tasks) { create_list(:task, 2, user: admin) }
+  given!(:tasks) { TaskDecorator.decorate_collection(create_list(:task, 2, user: user)) }
+  given!(:admin_tasks) { TaskDecorator.decorate_collection(create_list(:task, 2, user: admin)) }
 
   feature "Authenticate user" do
     before { sign_in(user) }
@@ -28,7 +28,7 @@ feature "Users tasks", %(
           expect(page).to have_content(task.name)
           expect(page).to have_content(task.description)
           expect(page).to have_content(task.state)
-          expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
+          expect(page).to have_content(task.created)
         end
       end
     end
@@ -54,7 +54,7 @@ feature "Users tasks", %(
           expect(page).to have_content(task.name)
           expect(page).to have_content(task.description)
           expect(page).to have_content(task.state)
-          expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
+          expect(page).to have_content(task.created)
           expect(page).to have_content(task.user)
         end
       end

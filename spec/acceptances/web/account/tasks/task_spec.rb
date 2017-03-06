@@ -7,7 +7,7 @@ feature "Task card", %(
 ) do
   given(:user) { create(:user) }
   given(:admin) { create(:user, role: "admin") }
-  given(:task) { create(:task, user: user) }
+  given(:task) { create(:task, user: user).decorate }
 
   feature "assigned user" do
     before { sign_in(user) }
@@ -19,7 +19,7 @@ feature "Task card", %(
         expect(page).to have_content(task.id)
         expect(page).to have_content(task.name)
         expect(page).to have_content(task.description)
-        expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
+        expect(page).to have_content(task.created)
         expect(page).to_not have_content(task.user)
       end
     end
@@ -35,7 +35,7 @@ feature "Task card", %(
         expect(page).to have_content(task.id)
         expect(page).to have_content(task.name)
         expect(page).to have_content(task.description)
-        expect(page).to have_content(I18n.l(task.created_at.localtime, format: :short))
+        expect(page).to have_content(task.created)
         expect(page).to have_content(task.user)
       end
     end
