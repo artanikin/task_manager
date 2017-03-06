@@ -7,12 +7,10 @@ feature "User sign out", %(
 ) do
   given(:user) { create(:user) }
 
-  background do
+  scenario "registered user sign out" do
     sign_in(user)
     visit account_tasks_path
-  end
 
-  scenario "registered user sign out" do
     click_on "Sign Out"
 
     expect(current_path).to eq(root_path)
