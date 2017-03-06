@@ -20,6 +20,9 @@ engines:
     enabled: true
     config:
       file: .rubocop.yml
+    checks:
+      Style/ClassAndModuleChildren:
+        enable: false
 ratings:
   paths:
   - Gemfile.lock
