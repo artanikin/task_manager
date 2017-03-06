@@ -6,6 +6,10 @@ en:
           notice: "You successfully signed up" 
           alert: "You are not signed up"
       account:
+        states:
+          update:
+            notice: "State successfully changed"
+            alert: "You can't change task for this state"
         tasks:
           create:
             notice: "Task was successfully created"

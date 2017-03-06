@@ -28,4 +28,12 @@ class Task < ApplicationRecord
   def editable?(human)
     user == human || human.admin?
   end
+
+  def change_state(human, event)
+    if editable?(human) && state_events.include?(event.to_sym) && send("can_#{event}?")
+      send(event)
+    else
+      false
+    end
+  end
 end
