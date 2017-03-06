@@ -61,8 +61,8 @@ feature "Users tasks", %(
     end
   end
 
-  scenario "Not authenticated user not see My Tasks link" do
+  scenario "Not authenticated user not see Personal tasks link" do
     visit root_path
-    expect(page).to_not have_link("My Tasks")
+    expect(page).to_not have_link("Personal tasks", href: account_tasks_path)
   end
 end
