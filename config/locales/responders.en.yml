@@ -1,12 +1,17 @@
 en:
   flash:
+    web:
+      users:
+        create:
+          notice: "You successfully signed up" 
+          alert: "You are not signed up"
     actions:
       create:
-        notice: '%{resource_name} was successfully created.'
-        # alert: '%{resource_name} could not be created.'
+        notice: "%{resource_name} was successfully created."
+        alert: "%{resource_name} could not be created."
       update:
-        notice: '%{resource_name} was successfully updated.'
-        # alert: '%{resource_name} could not be updated.'
+        notice: "%{resource_name} was successfully updated."
+        alert: "%{resource_name} could not be updated."
       destroy:
-        notice: '%{resource_name} was successfully destroyed.'
-        alert: '%{resource_name} could not be destroyed.'
+        notice: "%{resource_name} was successfully destroyed."
+        alert: "%{resource_name} could not be destroyed."
