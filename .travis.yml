@@ -10,6 +10,11 @@ notifications:
 
 addons:
   postgresql: "9.4"
+  code_climate:
+    repo_token: 38d3893ebb4a20cf892af07dadfce536364ac7c16dee74bc94482811ed0ea583
+
+after_success:
+  - bundle exec codeclimate-test-reporter
 
 bundler_args: --without development --deployment --jobs=3 --retry=3
 cache: bundler
