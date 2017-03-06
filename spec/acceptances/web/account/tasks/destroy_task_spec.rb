@@ -12,16 +12,14 @@ feature "Destroy task", %(
     before { sign_in(user) }
 
     context "assigned to task" do
-      before { visit account_tasks_path }
-
       scenario "can destroy task" do
-        within "#tasks" do
-          click_on "Delete"
-        end
+        visit account_tasks_path
 
-        expect(page).to_not have_content(task.name)
-        expect(page).to have_content("Task was successfully deleted")
+        within("#tasks") { click_on "Delete" }
+
         expect(current_path).to eq(account_tasks_path)
+        expect(page).to have_content("Task was successfully deleted")
+        expect(page).to_not have_content(task.name)
       end
     end
   end
