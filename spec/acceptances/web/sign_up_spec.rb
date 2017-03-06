@@ -17,29 +17,12 @@ feature "User sign up", %(
     expect(page).to have_content("You successfully signed up")
   end
 
-  scenario "user can not sign up without email" do
-    fill_in "Password", with: "pass123"
-    fill_in "Confirmation", with: "pass123"
+  scenario "user can not sign up with invalid params" do
     click_on "Sign up"
 
     expect(page).to have_content("You are not signed up")
     expect(page).to have_content("Email is incorrect format")
-  end
-
-  scenario "user can not sign up without password" do
-    fill_in "Email", with: "user@example.com"
-    click_on "Sign up"
-
-    expect(page).to have_content("You are not signed up")
     expect(page).to have_content("Password can't be blank")
-  end
-
-  scenario "user can not sign up when password not confirmed" do
-    fill_in "Email", with: "user@example.com"
-    fill_in "Password", with: "pass123"
-    click_on "Sign up"
-
-    expect(page).to have_content("You are not signed up")
-    expect(page).to have_content("Password confirmation doesn't match Password")
+    expect(page).to have_content("Password is too short (minimum is 6 characters)")
   end
 end

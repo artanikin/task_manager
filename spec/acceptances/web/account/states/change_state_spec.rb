@@ -23,6 +23,7 @@ feature "Change state", %(
         expect(page).to have_content("started")
         expect(page).to have_link("finish", href: "/account/tasks/#{task.id}/states/finish")
       end
+
       expect(page).to have_content("State successfully changed")
     end
   end
@@ -41,6 +42,7 @@ feature "Change state", %(
         expect(page).to have_content("started")
         expect(page).to have_link("finish", href: "/account/tasks/#{task.id}/states/finish")
       end
+
       expect(page).to have_content("State successfully changed")
     end
   end

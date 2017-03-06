@@ -2,10 +2,11 @@ require "rails_helper"
 
 RSpec.describe Web::Account::StatesController, type: :controller do
   describe "PATCH #update" do
-    let(:bob) { create(:user) }
+    let!(:bob) { create(:user) }
     let(:john) { create(:user, role: "admin") }
-    let(:task_new) { create(:task, user: bob) }
-    let(:task_started) { create(:task, user: bob, state: "started") }
+
+    let(:task_new)      { create(:task, user: bob) }
+    let(:task_started)  { create(:task, user: bob, state: "started") }
     let(:task_finished) { create(:task, user: bob, state: "finished") }
 
     context "authenticated user" do

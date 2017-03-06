@@ -13,9 +13,7 @@ RSpec.describe Web::SessionsController, type: :controller do
     let!(:user) { create(:user) }
     let(:parameters) { { session: { email: user.email, password: "pass123" } } }
 
-    subject { post :create, params: parameters }
-
-    before { subject }
+    before { post :create, params: parameters }
 
     it "set user_id in session" do
       expect(session[:user_id]).to eq(user.id)
