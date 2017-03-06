@@ -3,45 +3,28 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   before_action :check_task_editable!, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user.admin?
-      @tasks = Task.all.order("created_at DESC")
-    else
-      @tasks = current_user.tasks.order("created_at DESC")
-    end
+    respond_with(@tasks = Task.for_user(current_user))
   end
 
   def show; end
 
   def new
-    @task = Task.new
-    @task.build_attachment
+    respond_with(@task = Task.new)
   end
 
   def create
-    @task = Task.new(filtered_params)
-
-    if @task.save
-      redirect_to account_tasks_path, notice: "Task was successfully created"
-    else
-      flash[:alert] = "Task not created"
-      render :new
-    end
+    respond_with(@task = Task.create(filtered_params), location: -> { account_tasks_path })
   end
 
   def edit; end
 
   def update
-    if @task.update(task_params)
-      redirect_to account_tasks_path, notice: "Task was successfully updated"
-    else
-      flash[:alert] = "Task not updated"
-      render :edit
-    end
+    @task.update(task_params)
+    respond_with(@task, location: -> { account_tasks_path })
   end
 
   def destroy
-    @task.destroy
-    redirect_to account_tasks_path, notice: "Task was successfully deleted"
+    respond_with(:account, @task.destroy)
   end
 
   private

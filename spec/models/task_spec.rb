@@ -15,6 +15,21 @@ RSpec.describe Task, type: :model do
   it { should reject_events :finish, when: :new }
   it { should reject_events :start, when: :finished }
 
+  describe ".for_user" do
+    let(:admin) { create(:user, role: "admin") }
+    let(:user) { create(:user) }
+    let!(:admin_tasks) { create_list(:task, 2, user: admin) }
+    let!(:user_tasks) { create_list(:task, 2, user: user) }
+
+    it "user get only assigned tasks" do
+      expect(Task.for_user(user)).to match_array(user_tasks)
+    end
+
+    it "admin get all tasks" do
+      expect(Task.for_user(admin)).to match_array(admin_tasks + user_tasks)
+    end
+  end
+
   describe "#assigned?" do
     let!(:user) { create(:user) }
     let!(:task) { create(:task) }

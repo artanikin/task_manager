@@ -5,6 +5,16 @@ en:
         create:
           notice: "You successfully signed up" 
           alert: "You are not signed up"
+      account:
+        tasks:
+          create:
+            notice: "Task was successfully created"
+            alert: "Task not created"
+          update:
+            notice: "Task was successfully updated"
+            alert: "Task not updated"
+          destroy:
+            notice:  "Task was successfully deleted"
     actions:
       create:
         notice: "%{resource_name} was successfully created."

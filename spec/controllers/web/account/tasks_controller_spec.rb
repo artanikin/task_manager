@@ -113,10 +113,6 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         expect(assigns(:task)).to be_a_new(Task)
       end
 
-      it "build new attachment for task" do
-        expect(assigns(:task).attachment).to be_a_new(Attachment)
-      end
-
       it "render view new" do
         expect(response).to render_template(:new)
       end

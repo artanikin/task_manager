@@ -5,7 +5,7 @@
   = f.input :description
   - if current_user.admin?
     = f.association :user
-  = f.simple_fields_for :attachment do |a|
+  = f.simple_fields_for :attachment, task.build_attachment do |a|
     = a.input :file
 
   = f.button :submit, "Save", class: "btn-primary"
