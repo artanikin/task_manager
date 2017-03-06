@@ -17,6 +17,8 @@ gem "simple_form"
 gem "carrierwave"
 gem "state_machines-activerecord"
 gem "responders"
+gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
+gem "draper"
 
 gem "jquery-rails"
 gem "turbolinks", "~> 5"

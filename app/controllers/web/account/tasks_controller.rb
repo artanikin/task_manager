@@ -3,7 +3,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   before_action :check_task_editable!, only: [:show, :edit, :update, :destroy]
 
   def index
-    respond_with(@tasks = Task.for_user(current_user))
+    respond_with(@tasks = Task.for_user(current_user).decorate)
   end
 
   def show; end
@@ -34,7 +34,7 @@ class Web::Account::TasksController < Web::Account::ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task.find(params[:id]).decorate
   end
 
   def check_task_editable!

@@ -18,6 +18,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         expect(assigns(:tasks)).to match_array(my_tasks)
       end
 
+      it "should be decorated tasks" do
+        expect(assigns(:tasks)).to be_decorated
+      end
+
       it "render index view" do
         expect(response).to render_template(:index)
       end
@@ -34,6 +38,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
       it "populates array of all tasks" do
         all_tasks = admin_tasks + another_user_tasks
         expect(assigns(:tasks)).to match_array(all_tasks)
+      end
+
+      it "should be decorated tasks" do
+        expect(assigns(:tasks)).to be_decorated
       end
 
       it "render index view" do
@@ -62,6 +70,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
         expect(assigns(:task)).to eq(task)
       end
 
+      it "should be decorated task" do
+        expect(assigns(:task)).to be_decorated
+      end
+
       it "render show" do
         expect(response).to render_template(:show)
       end
@@ -83,6 +95,10 @@ RSpec.describe Web::Account::TasksController, type: :controller do
 
       it "assigns to @task" do
         expect(assigns(:task)).to eq(task)
+      end
+
+      it "should be decorated task" do
+        expect(assigns(:task)).to be_decorated
       end
 
       it "render show" do

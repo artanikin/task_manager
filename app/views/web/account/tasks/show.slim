@@ -10,7 +10,7 @@
         dd = @task.description
 
         dt Created
-        dd = l @task.created_at.localtime, format: :short
+        dd = @task.created
 
         - if current_user.admin?
           dt User
