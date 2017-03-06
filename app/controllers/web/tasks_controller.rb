@@ -1,5 +1,5 @@
 class Web::TasksController < Web::ApplicationController
   def index
-    @tasks = Task.all.order("created_at DESC")
+    respond_with(@tasks = Task.all.order("created_at DESC"))
   end
 end

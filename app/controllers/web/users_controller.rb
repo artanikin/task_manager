@@ -1,6 +1,4 @@
 class Web::UsersController < Web::ApplicationController
-  respond_to :html
-
   def new
     respond_with(@user = User.new)
   end
