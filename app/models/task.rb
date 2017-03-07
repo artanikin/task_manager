@@ -18,7 +18,7 @@ class Task < ApplicationRecord
   end
 
   def self.for_user(human)
-    (human.admin? ? all.include(:user) : human.tasks).order("created_at DESC")
+    (human.admin? ? all.includes(:user) : human.tasks).order("created_at DESC")
   end
 
   def assigned?(human)
